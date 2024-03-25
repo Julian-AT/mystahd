@@ -36,7 +36,6 @@ export default function Home() {
           </div>
           <Image src={Ghost} alt="Ghost" width={600} height={580} />
         </div>
-        <BackgroundBeams />
         <div className="absolute bottom-0 h-[200px] w-[200%] ml-[-50%] mb-[-150px] rounded-t-[100%] bg-background"></div>
       </div>
       <div className="bg-transparent container flex flex-col space-y-10">
@@ -57,6 +56,12 @@ export default function Home() {
               price={product.price_display}
               title={product.title}
               category={`${product.recurring_interval_count} ${product.recurring_interval}S`}
+              image={
+                product.image_attachments &&
+                product.image_attachments[0].cloudflare_image_id
+                  ? `https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/${product.image_attachments[0].cloudflare_image_id}/shopitem`
+                  : undefined
+              }
               grade={
                 (product.title as string).includes("Premium Plus")
                   ? ProductGrade.PREMIUM_PLUS

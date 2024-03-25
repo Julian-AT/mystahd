@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { cn } from "@/lib/utils";
 
 export enum ProductGrade {
   PREMIUM_PLUS = "Premium+",
@@ -52,7 +53,16 @@ const ProductCard = ({
             <div className="shadow p-4 rounded-lg bg-card border border-border">
               <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
                 <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                  <div className="absolute inset-0 bg-secondary opacity-10"></div>
+                  <div
+                    className={cn(
+                      "absolute inset-0 bg-secondary",
+                      !image && "opacity-20"
+                    )}
+                  >
+                    {image !== undefined && (
+                      <Image src={image} alt={title} fill objectFit="cover" />
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -70,7 +80,7 @@ const ProductCard = ({
                   <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
                     {category}
                   </Badge>
-                  <Badge className="inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                  <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
                     {grade}
                   </Badge>
                 </div>
@@ -94,7 +104,16 @@ const ProductCard = ({
           </DialogHeader>
           <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
             <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-              <div className="absolute inset-0 bg-secondary opacity-10"></div>
+              <div
+                className={cn(
+                  "absolute inset-0 bg-secondary",
+                  !image && "opacity-20"
+                )}
+              >
+                {image !== undefined && (
+                  <Image src={image} alt={title} fill objectFit="cover" />
+                )}
+              </div>
             </div>
           </div>
           <DialogFooter>
