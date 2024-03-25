@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "./ui/scroll-area";
 
 export enum ProductGrade {
   PREMIUM_PLUS = "Premium+",
@@ -97,7 +98,7 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
             </div>
           </div>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-auto border">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription className="py-3">
@@ -111,23 +112,25 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
               </div>
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col space-y-5">
-            <div className="whitespace-pre-wrap">{description}</div>
-            <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-              <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                <div
-                  className={cn(
-                    "absolute inset-0 bg-secondary",
-                    !image && "opacity-20"
-                  )}
-                >
-                  {image && (
-                    <Image src={image} alt={title} fill objectFit="cover" />
-                  )}
+          <ScrollArea className="h-[50vh] overflow-hidden">
+            <div className="flex flex-col space-y-5">
+              <div className="whitespace-pre-wrap">{description}</div>
+              <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
+                <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                  <div
+                    className={cn(
+                      "absolute inset-0 bg-secondary",
+                      !image && "opacity-20"
+                    )}
+                  >
+                    {image && (
+                      <Image src={image} alt={title} fill objectFit="cover" />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollArea>
           <DialogFooter className="flex w-full justify-between">
             <div className="w-full">
               <span className="text-lg uppercase">€</span>
