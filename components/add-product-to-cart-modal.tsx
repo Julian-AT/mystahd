@@ -1,4 +1,5 @@
-import Image from "next/image";
+"use client";
+
 import React from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -11,10 +12,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { cn } from "@/lib/utils";
-import { ScrollArea } from "./ui/scroll-area";
 import ProductCard from "./product-card";
 import ProductModalContent from "./product-modal-content";
+import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
+import { IconSpinner } from "./icons";
+import { redirect, useRouter } from "next/navigation";
+import { toast } from "sonner";
+import UserEmailModal from "./user-email-modal";
 
 export enum ProductGrade {
   PREMIUM_PLUS = "Premium+",
@@ -28,6 +32,9 @@ interface ProductCardProps {
 }
 
 const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
+  const { getPaymentLinkForProduct, isLoading } = useShoppingCart();
+  const router = useRouter();
+
   const {
     id,
     title,
@@ -83,14 +90,21 @@ const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
               <span className="text-lg uppercase">€</span>
               <span className="text-lg">{price},-</span>
             </div>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                addToCart(product);
-              }}
-            >
-              Add to Cart
-            </Button>
+            {product.type === "SUBSCRIPTION" ? (
+              <UserEmailModal
+                product={product}
+                getPaymentLinkForProduct={getPaymentLinkForProduct}
+              />
+            ) : (
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  addToCart(product);
+                }}
+              >
+                Add to Cart
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>

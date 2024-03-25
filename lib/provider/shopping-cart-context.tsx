@@ -1,23 +1,31 @@
+import { createPaymentLink } from "@/server-actions/sellix";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { toast } from "sonner";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
 }
 
-type Cart = CartItem[];
-
 interface ShoppingCartContextType {
   cartItems: CartItem[];
+  isLoading: boolean;
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: number) => void;
+  getPaymentLink: (email: string) => Promise<string | undefined>;
+  getPaymentLinkForProduct: (
+    product: Product,
+    email: string
+  ) => Promise<string | undefined>;
   clearCart: () => void;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextType>({
   cartItems: [],
+  isLoading: false,
   addToCart: () => {},
   removeFromCart: () => {},
+  getPaymentLink: async () => "",
+  getPaymentLinkForProduct: async () => "",
   clearCart: () => {},
 });
 
@@ -39,6 +47,46 @@ export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
   children,
 }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getPaymentLink = async (email: string) => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await createPaymentLink(cartItems, email);
+      if (error) {
+        throw new Error(error);
+      }
+      const link = data.data.url;
+      console.log(link);
+      setIsLoading(false);
+      return link;
+    } catch (error) {
+      console.log(error);
+
+      toast.error("Failed to create payment link");
+      setIsLoading(false);
+    }
+  };
+
+  const getPaymentLinkForProduct = async (product: Product, email: string) => {
+    setIsLoading(true);
+    try {
+      const cartItem: CartItem = { ...product, quantity: 1 };
+      const { data, error } = await createPaymentLink([cartItem], email);
+      if (error) {
+        throw new Error(error);
+      }
+      const link = data.data.url;
+      console.log(link);
+      setIsLoading(false);
+      return link;
+    } catch (error) {
+      console.log(error);
+
+      toast.error("Failed to create payment link for product " + product.title);
+      setIsLoading(false);
+    }
+  };
 
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems((prevItems) => {
@@ -73,8 +121,11 @@ export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
 
   const value = {
     cartItems,
+    isLoading,
     addToCart,
     removeFromCart,
+    getPaymentLink,
+    getPaymentLinkForProduct,
     clearCart,
   };
 
