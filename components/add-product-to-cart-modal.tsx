@@ -24,10 +24,10 @@ export enum ProductGrade {
 
 interface ProductCardProps {
   product: Product;
-  removeFromCard: (productId: number) => void;
+  addToCart: (product: Product) => void;
 }
 
-const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
+const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
   const {
     id,
     title,
@@ -56,10 +56,10 @@ const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
       <Dialog>
         <DialogTrigger asChild>
           <div>
-            <ProductCard product={product} disableAnimations />
+            <ProductCard product={product} />
           </div>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="h-auto border">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription className="py-3">
@@ -86,10 +86,10 @@ const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                removeFromCard(id);
+                addToCart(product);
               }}
             >
-              Remove from Cart
+              Add to Cart
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -98,4 +98,4 @@ const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
   );
 };
 
-export default ShoppingCartItem;
+export default AddProductToCartModal;

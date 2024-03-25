@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import ShoppingCartItem from "./shopping-cart-item";
+import ClearShoppingCartModal from "./clear-shopping-cart-modal";
 
 export function ShoppingCartSheet() {
   const { cartItems, removeFromCart } = useShoppingCart();
@@ -47,11 +48,22 @@ export function ShoppingCartSheet() {
               />
             ))}
           </div>
-          <div>
-            <div>
-              Total: €
-              {cartItems.reduce((p, { price_display }) => price_display + p, 0)}
-              ,-
+          <div className="flex flex-col space-y-5">
+            <div className="flex justify-between gap-3">
+              <div
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "h-9 w-full"
+                )}
+              >
+                Total: €
+                {cartItems.reduce(
+                  (p, { price_display }) => price_display + p,
+                  0
+                )}
+                ,-
+              </div>
+              <ClearShoppingCartModal />
             </div>
             <Button
               variant="default"

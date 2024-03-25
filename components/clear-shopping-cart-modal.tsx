@@ -14,15 +14,18 @@ import {
 } from "@/components/ui/alert-dialog";
 import { IconTrash } from "./icons";
 import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
+import { Button } from "./ui/button";
 
 const ClearShoppingCartModal = () => {
-  const { clearCart } = useShoppingCart();
+  const { clearCart, cartItems } = useShoppingCart();
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <IconTrash />
-        Clear Shopping Cart
+      <AlertDialogTrigger disabled={cartItems.length === 0}>
+        <Button variant="outline">
+          <IconTrash className="mr-2" />
+          Clear Shopping Cart
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

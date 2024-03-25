@@ -22,10 +22,10 @@ export enum ProductGrade {
 
 interface ProductCardProps {
   product: Product;
-  addToCart: (product: Product) => void;
+  disableAnimations?: boolean;
 }
 
-const ProductCard = ({ product, addToCart }: ProductCardProps) => {
+const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
   const {
     id,
     title,
@@ -50,103 +50,59 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
   }`;
 
   return (
-    <div className="relative mx-auto w-full">
-      <Dialog>
-        <DialogTrigger asChild>
-          <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
-            <div className="shadow p-4 rounded-lg bg-card border border-border">
-              <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-                <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                  <div
-                    className={cn(
-                      "absolute inset-0 bg-secondary",
-                      !image && "opacity-20"
-                    )}
-                  >
-                    {image && (
-                      <Image src={image} alt={title} fill objectFit="cover" />
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 text-secondary-foreground">
-                <h2 className="font-semibold text-base md:text-lg line-clamp-1">
-                  {title}
-                </h2>
-                <p className="mt-2 text-sm line-clamp-1 text-muted-foreground">
-                  {description}
-                </p>
-              </div>
-
-              <div className="flex justify-between mt-8">
-                <div className="flex items-center space-x-3">
-                  <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                    {validityPeriod}
-                  </Badge>
-                  <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                    {grade}
-                  </Badge>
-                </div>
-                <div className="flex justify-end">
-                  <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                    <span className="text-lg uppercase">€</span>
-                    <span className="text-lg">{price},-</span>
-                  </p>
-                </div>
-              </div>
+    <div
+      className={cn(
+        "relative inline-block duration-300 ease-in-out transition-transform transform w-full cursor-pointer",
+        !disableAnimations && "hover:-translate-y-2"
+      )}
+    >
+      <div className="shadow p-4 rounded-lg bg-card border border-border">
+        <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
+          <div
+            className={cn(
+              "transition-transform duration-500 transform ease-in-out w-full",
+              !disableAnimations && "hover:scale-110"
+            )}
+          >
+            <div
+              className={cn(
+                "absolute inset-0 bg-secondary",
+                !image && "opacity-20"
+              )}
+            >
+              {image && (
+                <Image src={image} alt={title} fill objectFit="cover" />
+              )}
             </div>
           </div>
-        </DialogTrigger>
-        <DialogContent className="h-auto border">
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogDescription className="py-3">
-              <div className="flex items-center space-x-3">
-                <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                  {validityPeriod}
-                </Badge>
-                <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                  {grade}
-                </Badge>
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-          <ScrollArea className="h-[50vh] overflow-hidden">
-            <div className="flex flex-col space-y-5">
-              <div className="whitespace-pre-wrap">{description}</div>
-              <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-                <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                  <div
-                    className={cn(
-                      "absolute inset-0 bg-secondary",
-                      !image && "opacity-20"
-                    )}
-                  >
-                    {image && (
-                      <Image src={image} alt={title} fill objectFit="cover" />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ScrollArea>
-          <DialogFooter className="flex w-full justify-between">
-            <div className="w-full">
+        </div>
+
+        <div className="mt-4 text-secondary-foreground">
+          <h2 className="font-semibold text-base md:text-lg line-clamp-1">
+            {title}
+          </h2>
+          <p className="mt-2 text-sm line-clamp-1 text-muted-foreground">
+            {description}
+          </p>
+        </div>
+
+        <div className="flex justify-between mt-8">
+          <div className="flex items-center space-x-3">
+            <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
+              {validityPeriod}
+            </Badge>
+            <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
+              {grade}
+            </Badge>
+          </div>
+          <div className="flex justify-end">
+            <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
               <span className="text-lg uppercase">€</span>
               <span className="text-lg">{price},-</span>
-            </div>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                addToCart(product);
-              }}
-            >
-              Add to Cart
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
