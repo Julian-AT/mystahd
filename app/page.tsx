@@ -10,6 +10,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Globe } from "@/components/globe";
 import { GlobeDemo } from "@/components/so-globe";
+import { BackgroundBeams } from "@/components/background-beams";
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
@@ -24,12 +25,18 @@ export default function Home() {
     <main className="flex min-h-screen flex-col ">
       <div className="bg-[#121212] relative overflow-hidden">
         <div className="grid grid-cols-2 mt-16 container">
-          <div className="absolute z-10  bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
           <div className="flex flex-col space-y-5 justify-center z-20 y-10">
-            <GlobeDemo />
+            <span className="text-4xl font-bold text-secondary-foreground">
+              ShadowOverlay Store
+            </span>
+            <p className="text-muted-foreground">
+              Welcome to the ShadowOverlay store, where you can find the best
+              cheats for the most popular games.
+            </p>
           </div>
           <Image src={Ghost} alt="Ghost" width={600} height={580} />
         </div>
+        <BackgroundBeams />
         <div className="absolute bottom-0 h-[200px] w-[200%] ml-[-50%] mb-[-150px] rounded-t-[100%] bg-background"></div>
       </div>
       <div className="bg-transparent container flex flex-col space-y-10">
