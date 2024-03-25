@@ -21,10 +21,10 @@ export enum ProductGrade {
 
 interface ProductCardProps {
   product: Product;
-  addToCart: (product: Product) => void;
+  removeFromCard: (productId: number) => void;
 }
 
-const ProductCard = ({ product, addToCart }: ProductCardProps) => {
+const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
   const {
     id,
     title,
@@ -52,10 +52,10 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
     <div className="relative mx-auto w-full">
       <Dialog>
         <DialogTrigger asChild>
-          <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
+          <div className="relative inline-block duration-300 ease-in-out transition-transform transform w-full cursor-pointer">
             <div className="shadow p-4 rounded-lg bg-card border border-border">
               <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-                <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+                <div className="transition-transform duration-500 transform ease-in-out  w-full">
                   <div
                     className={cn(
                       "absolute inset-0 bg-secondary",
@@ -114,7 +114,7 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
           <div className="flex flex-col space-y-5">
             <div className="whitespace-pre-wrap">{description}</div>
             <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-              <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+              <div className="transition-transform duration-500 transform ease-in-out w-full">
                 <div
                   className={cn(
                     "absolute inset-0 bg-secondary",
@@ -136,10 +136,10 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                addToCart(product);
+                removeFromCard(id);
               }}
             >
-              Add to Cart
+              Remove from Cart
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -148,4 +148,4 @@ const ProductCard = ({ product, addToCart }: ProductCardProps) => {
   );
 };
 
-export default ProductCard;
+export default ShoppingCartItem;

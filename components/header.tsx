@@ -6,6 +6,7 @@ import { buttonVariants } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
 import Logo from "@/public/logo.png";
 import Image from "next/image";
+import { ShoppingCartSheet } from "./shopping-cart-sheet";
 
 export function SiteHeader() {
   return (
@@ -23,7 +24,7 @@ export function SiteHeader() {
             <span className="font-bold text-xl">ShadowOverlay</span>
           </div>
 
-          <nav className="flex items-center">
+          <nav className="flex items-center space-x-3">
             <Link
               href={"https://discord.gg/Mu3gmSuZgD"}
               target="_blank"
@@ -31,12 +32,14 @@ export function SiteHeader() {
               className={cn(
                 buttonVariants({
                   variant: "outline",
-                })
+                }),
+                "flex items-center justify-center"
               )}
             >
-              <IconDiscord className="h-8 w-8 fill-current" />
+              <IconDiscord className="h-7 w-7 mr-1 fill-current" />
               <span>Discord</span>
             </Link>
+            <ShoppingCartSheet />
           </nav>
         </div>
       </div>

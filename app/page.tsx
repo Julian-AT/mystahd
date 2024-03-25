@@ -1,26 +1,10 @@
-"use client";
-
-import ProductCard, { ProductGrade } from "@/components/product-card";
 import Image from "next/image";
 import Ghost from "@/public/ghost.png";
-import { useEffect, useState } from "react";
-import { getProducts } from "@/server-actions/sellix";
-import { Button, buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { Globe } from "@/components/globe";
-import { GlobeDemo } from "@/components/so-globe";
-import { BackgroundBeams } from "@/components/background-beams";
+import ProductCatalog from "@/components/product-catalog";
+import { Suspense } from "react";
+import ProductSkeleton from "@/components/products-skeleton";
 
 export default function Home() {
-  const [products, setProducts] = useState<any[]>([]);
-
-  useEffect(() => {
-    getProducts().then((data) => {
-      setProducts(data.data);
-    });
-  }, []);
-
   return (
     <main className="flex min-h-screen flex-col ">
       <div className="bg-[#121212] relative overflow-hidden">
@@ -47,31 +31,18 @@ export default function Home() {
             Extensive selection of private cheats for the most popular games.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-          {products.map((product, index) => (
-            <ProductCard
-              key={index}
-              id={product.id}
-              description={product.description}
-              price={product.price_display}
-              title={product.title}
-              category={`${product.recurring_interval_count} ${product.recurring_interval}S`}
-              image={
-                product.image_attachments &&
-                product.image_attachments[0].cloudflare_image_id
-                  ? `https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/${product.image_attachments[0].cloudflare_image_id}/shopitem`
-                  : undefined
-              }
-              grade={
-                (product.title as string).includes("Premium Plus")
-                  ? ProductGrade.PREMIUM_PLUS
-                  : product.title.includes("Premium")
-                  ? ProductGrade.PREMIUM
-                  : ProductGrade.ESP_ONLY
-              }
-            />
-          ))}
-        </div>
+        <Suspense
+          fallback={
+            <div>
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+            </div>
+          }
+        >
+          <ProductCatalog />
+        </Suspense>
       </div>
     </main>
   );
