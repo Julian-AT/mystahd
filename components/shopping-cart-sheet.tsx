@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { IconSpinner, IconSubmit } from "./icons";
+import { IconShoppingCart, IconSpinner, IconSubmit } from "./icons";
 import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
 import { Card } from "./ui/card";
 import ProductCard from "./product-card";
@@ -30,7 +30,7 @@ export function ShoppingCartSheet() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">
-          <IconSubmit className="h-5 w-5 mr-1 fill-current" />
+          <IconShoppingCart className="h-5 w-5 mr-1 fill-current" />
           <span>Shopping Cart</span>
         </Button>
       </SheetTrigger>
