@@ -52,9 +52,3 @@ interface PricingPlan {
   isMonthlySubscription: boolean;
   features: string[];
 }
-
-enum ProductCategory {
-  ACCOUNTS = "Accounts",
-  CHEATS = "Cheats",
-  UNLOCKS = "Unlocks",
-}
