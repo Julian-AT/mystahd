@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -10,14 +10,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "./ui/scroll-area";
+import { ScrollArea } from "../ui/scroll-area";
 
 export enum ProductGrade {
-  PREMIUM_PLUS = "Premium+",
-  PREMIUM = "Premium",
-  ESP_ONLY = "ESP Only",
+  PREMIUM_PLUS,
+  PREMIUM,
+  ESP_ONLY,
 }
 
 interface ProductCardProps {
@@ -39,11 +39,7 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
     image_attachment && image_attachment.cloudflare_image_id
       ? `https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/${image_attachment.cloudflare_image_id}/shopitem`
       : undefined;
-  const grade = title.includes("Premium Plus")
-    ? ProductGrade.PREMIUM_PLUS
-    : title.includes("Premium")
-    ? ProductGrade.PREMIUM
-    : ProductGrade.ESP_ONLY;
+  const grade = product.grade;
 
   const validityPeriod = `${recurring_interval_count} ${recurring_interval}${
     recurring_interval_count > 1 ? "S" : ""

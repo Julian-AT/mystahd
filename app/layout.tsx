@@ -3,8 +3,9 @@ import { Inter as FontSans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SiteHeader } from "@/components/header";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "@/components/footer";
+import Navbar from "@/components/header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased container bg-gray-900",
           fontSans.variable
         )}
       >
@@ -31,9 +32,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <SiteHeader />
+          <Navbar />
           {children}
           <Toaster />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

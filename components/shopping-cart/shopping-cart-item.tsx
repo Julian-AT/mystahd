@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -10,11 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "./ui/scroll-area";
-import ProductCard from "./product-card";
-import ProductModalContent from "./product-modal-content";
+import { ScrollArea } from "../ui/scroll-area";
+import ProductCard from "../products/product-card";
+import ProductModalContent from "../modals/product-modal-content";
 
 export enum ProductGrade {
   PREMIUM_PLUS = "Premium+",

@@ -1,6 +1,12 @@
+import { ProductGrade } from "@/components/products/product-card";
 import { getProducts } from "@/server-actions/sellix";
 import { useState, useEffect } from "react";
-import { log } from "three/examples/jsm/nodes/Nodes.js";
+
+enum ProductCategory {
+  ACCOUNTS = "accounts",
+  CHEATS = "cheats",
+  UNLOCKS = "unlocks",
+}
 
 export const useProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -16,9 +22,22 @@ export const useProducts = () => {
         return setError(error);
       }
 
-      setProducts(data.data.products);
-      console.log(data);
-
+      const products = data.data.products;
+      const extendedProducts = products.map((product) => ({
+        ...product,
+        grade: product.title.includes("Premium Plus")
+          ? ProductGrade.PREMIUM_PLUS
+          : product.title.includes("Premium")
+          ? ProductGrade.PREMIUM
+          : ProductGrade.ESP_ONLY,
+        category:
+          product.type === "SUBSCRIPTION"
+            ? ProductCategory.CHEATS
+            : product.type === "SERVICE"
+            ? ProductCategory.UNLOCKS
+            : ProductCategory.ACCOUNTS,
+      }));
+      setProducts(extendedProducts);
       setLoading(false);
     };
 

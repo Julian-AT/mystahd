@@ -30,6 +30,8 @@ interface Product {
   image_attachment: ProductImage | "";
   recurring_interval_count: number;
   recurring_interval: string;
+  category: ProductCategory;
+  grade: ProductGrade;
 }
 
 interface StoreData {
@@ -40,4 +42,19 @@ interface StoreData {
   error: null | string;
   message: null | string;
   env: string;
+}
+
+interface PricingPlan {
+  name: string;
+  desc: string;
+  price: number;
+  isMostPop: boolean;
+  isMonthlySubscription: boolean;
+  features: string[];
+}
+
+enum ProductCategory {
+  ACCOUNTS = "Accounts",
+  CHEATS = "Cheats",
+  UNLOCKS = "Unlocks",
 }

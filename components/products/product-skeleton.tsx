@@ -1,14 +1,14 @@
 import React from "react";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
 
 const ProductSkeleton = () => {
   return (
     <div className="flex flex-col space-y-3">
       <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
-        <div className="shadow p-4 rounded-lg bg-card border border-border">
+        <div className="shadow p-4 rounded-lg bg-gray-800 border border-border">
           <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
             <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-              <div className="absolute inset-0 bg-secondary" />
+              <div className="absolute inset-0 bg-gray-700" />
             </div>
           </div>
 

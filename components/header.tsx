@@ -1,48 +1,87 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import NavHeader from "@/components/nav-header";
+import NavLink from "@/components/nav-link";
 
-import { cn } from "@/lib/utils";
-import { IconDiscord } from "@/components/icons";
-import { buttonVariants } from "./ui/button";
-import { ModeToggle } from "./mode-toggle";
-import Logo from "@/public/logo.png";
-import Image from "next/image";
-import { ShoppingCartSheet } from "./shopping-cart-sheet";
+const Navbar = () => {
+  const [state, setState] = useState(false);
+  const menuBtnEl = useRef<any>();
 
-export function SiteHeader() {
+  const navigation = [
+    { name: "Cheats", href: "/store/cheats" },
+    { name: "Unlocks", href: "/store/unlocks" },
+    { name: "Accounts", href: "/store/accounts" },
+  ];
+
+  useEffect(() => {
+    document.onclick = (e) => {
+      const target = e.target;
+      if (menuBtnEl.current && !menuBtnEl.current.contains(target))
+        setState(false);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <div className="flex flex-1 items-center justify-between space-x-2">
-          <div className="relative flex items-center">
-            <Image
-              src={Logo}
-              alt="Logo"
-              width={64}
-              height={64}
-              className="rounded-full p-3"
-            />
-            <span className="font-bold text-xl">ShadowOverlay</span>
-          </div>
-
-          <nav className="flex items-center space-x-3">
-            <Link
-              href={"https://discord.gg/Mu3gmSuZgD"}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(
-                buttonVariants({
-                  variant: "outline",
-                }),
-                "flex items-center justify-center"
-              )}
-            >
-              <IconDiscord className="h-7 w-7 mr-1 fill-current" />
-              <span>Discord</span>
-            </Link>
-            <ShoppingCartSheet />
-          </nav>
-        </div>
+    <header className="relative">
+      <div className="custom-screen md:hidden">
+        <NavHeader
+          menuBtnEl={menuBtnEl}
+          state={state}
+          onClick={() => setState(!state)}
+        />
       </div>
+      <nav
+        className={`pb-5 md:text-sm md:static md:block ${
+          state
+            ? "bg-gray-900 absolute z-20 top-0 inset-x-0 rounded-b-2xl shadow-xl md:bg-gray-900"
+            : "hidden"
+        }`}
+      >
+        <div className="custom-screen items-center md:flex">
+          <NavHeader state={state} onClick={() => setState(!state)} />
+          <div
+            className={`flex-1 items-center mt-8 text-gray-300 md:font-medium md:mt-0 md:flex ${
+              state ? "block" : "hidden"
+            } `}
+          >
+            <ul className="flex-1 justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+              {navigation.map((item, idx) => {
+                return (
+                  <li key={idx} className="hover:text-gray-50">
+                    <Link href={item.href} className="block">
+                      {item.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
+              <NavLink
+                href="/store"
+                className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex"
+              >
+                Store
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
   );
-}
+};
+
+export default Navbar;

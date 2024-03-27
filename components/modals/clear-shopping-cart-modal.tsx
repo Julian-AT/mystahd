@@ -12,9 +12,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { IconTrash } from "./icons";
+import { IconTrash } from "../icons";
 import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const ClearShoppingCartModal = () => {
   const { clearCart, cartItems } = useShoppingCart();

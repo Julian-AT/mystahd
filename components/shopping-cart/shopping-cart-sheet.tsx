@@ -9,15 +9,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { IconShoppingCart, IconSpinner, IconSubmit } from "./icons";
+import { IconShoppingCart, IconSpinner, IconSubmit } from "../icons";
 import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
-import { Card } from "./ui/card";
-import ProductCard from "./product-card";
+import { Card } from "../ui/card";
+import ProductCard from "../products/product-card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 import ShoppingCartItem from "./shopping-cart-item";
-import ClearShoppingCartModal from "./clear-shopping-cart-modal";
+import ClearShoppingCartModal from "../modals/clear-shopping-cart-modal";
 import { createPaymentLink } from "@/server-actions/sellix";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -11,11 +11,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import ProductCard from "./product-card";
+} from "../ui/dialog";
+import ProductCard from "../products/product-card";
 import ProductModalContent from "./product-modal-content";
 import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
-import { IconSpinner } from "./icons";
+import { IconSpinner } from "../icons";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import UserEmailModal from "./user-email-modal";
