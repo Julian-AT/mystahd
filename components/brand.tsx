@@ -7,8 +7,8 @@ const Brand = ({ ...props }) => (
     alt="ShadowOverlay logo"
     className="rounded-full"
     {...props}
-    width={50}
-    height={50}
+    width={64}
+    height={64}
     priority
   />
 );

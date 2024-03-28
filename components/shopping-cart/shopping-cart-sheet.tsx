@@ -30,11 +30,12 @@ export function ShoppingCartSheet() {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">
-          <IconShoppingCart className="h-5 w-5 mr-1 fill-current" />
-          <span>Shopping Cart</span>
+          <div className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex">
+            <IconShoppingCart />
+          </div>
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="bg-gray-900">
         <SheetHeader>
           <SheetTitle>Shopping Cart</SheetTitle>
           <SheetDescription>
@@ -57,7 +58,7 @@ export function ShoppingCartSheet() {
               <div
                 className={cn(
                   buttonVariants({ variant: "outline" }),
-                  "h-9 w-full"
+                  "h-9 w-full bg-gray-900 hover:bg-gray-800"
                 )}
               >
                 Total: €

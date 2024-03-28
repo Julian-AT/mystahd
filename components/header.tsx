@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import NavHeader from "@/components/nav-header";
 import NavLink from "@/components/nav-link";
+import { IconShoppingCart } from "./icons";
+import { ShoppingCartSheet } from "./shopping-cart/shopping-cart-sheet";
 
 const Navbar = () => {
   const [state, setState] = useState(false);
@@ -39,18 +41,18 @@ const Navbar = () => {
             : "hidden"
         }`}
       >
-        <div className="custom-screen items-center md:flex">
+        <div className="md:grid md:grid-cols-3 custom-screen items-center ">
           <NavHeader state={state} onClick={() => setState(!state)} />
           <div
-            className={`flex-1 items-center mt-8 text-gray-300 md:font-medium md:mt-0 md:flex ${
+            className={`col-span-2 grid grid-cols-2 items-center mt-8 text-gray-300 md:font-medium${
               state ? "block" : "hidden"
             } `}
           >
-            <ul className="flex-1 justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+            <ul className="flex justify-center items-center space-y-6 md:flex md:space-x-10 md:space-y-0">
               {navigation.map((item, idx) => {
                 return (
-                  <li key={idx} className="hover:text-gray-50">
-                    <Link href={item.href} className="block">
+                  <li key={idx} className="relative hover:text-gray-50">
+                    <Link href={item.href} className="block text-xl">
                       {item.name}
                     </Link>
                   </li>
@@ -76,6 +78,7 @@ const Navbar = () => {
                   />
                 </svg>
               </NavLink>
+              <ShoppingCartSheet />
             </div>
           </div>
         </div>

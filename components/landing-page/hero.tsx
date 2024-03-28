@@ -4,6 +4,7 @@ import GradientWrapper from "@/components/gradient-wrapper";
 import NavLink from "@/components/nav-link";
 import YouTube from "react-youtube";
 import LayoutEffect from "@/components/layout-effect";
+import { IconDiscord, IconExternalLink, IconTelegram } from "../icons";
 
 const Hero = () => (
   <section>
@@ -17,6 +18,22 @@ const Hero = () => (
       >
         <div>
           <div className="space-y-5 max-w-3xl mx-auto text-center">
+            <div className="flex space-x-5 justify-center font-medium text-sm">
+              <NavLink
+                href="/store"
+                className="flex items-center gap-2  text-secondary-foreground bg-gray-800  hover:bg-gray-700"
+              >
+                <IconDiscord className="w-8 h-8" />
+                Discord
+              </NavLink>
+              <NavLink
+                href="/store"
+                className="flex items-center gap-2 mx-3 text-secondary-foreground bg-gray-800  hover:bg-gray-700"
+              >
+                <IconTelegram className="w-8 h-8" />
+                Telegram
+              </NavLink>
+            </div>
             <h1
               className="text-4xl bg-clip-text text-transparent bg-gradient-to-r font-extrabold mx-auto sm:text-6xl"
               style={{
@@ -32,26 +49,6 @@ const Hero = () => (
               developers that will make your game more productive and
               comfortable.
             </p>
-            <div className="flex justify-center font-medium text-sm">
-              <NavLink
-                href="/store"
-                className="flex items-center text-white bg-purple-600 hover:bg-purple-500 active:bg-purple-700 "
-              >
-                Store
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </NavLink>
-            </div>
           </div>
           <GradientWrapper
             className="mt-16 sm:mt-28"

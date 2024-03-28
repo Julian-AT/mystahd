@@ -1,18 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "../ui/scroll-area";
 
 export enum ProductGrade {
   PREMIUM_PLUS,

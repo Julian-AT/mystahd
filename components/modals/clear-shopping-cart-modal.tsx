@@ -22,7 +22,7 @@ const ClearShoppingCartModal = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={cartItems.length === 0}>
-        <Button variant="outline">
+        <Button variant="outline" className="bg-gray-900 hover:bg-gray-800">
           <IconTrash className="mr-2" />
           Clear Shopping Cart
         </Button>
