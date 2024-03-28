@@ -8,14 +8,14 @@ import PromoVideo from "@/components/landing-page/promo-video";
 
 export const metadata: Metadata = {
   title: "Home - Shadow Overlay",
-  description: "Best cheats for all games",
+  description: "Best Call Of Duty cheats",
 };
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col ">
       <Hero />
-      <Pricing />
+      <Pricing title="Choose a category to get started" />
       <Features />
       <CTA />
       <Testimonial />

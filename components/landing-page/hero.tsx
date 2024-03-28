@@ -8,7 +8,7 @@ import { IconDiscord, IconExternalLink, IconTelegram } from "../icons";
 
 const Hero = () => (
   <section>
-    <div className="custom-screen py-28">
+    <div className="custom-screen pt-28">
       <LayoutEffect
         className="duration-1000 delay-300"
         isInviewState={{

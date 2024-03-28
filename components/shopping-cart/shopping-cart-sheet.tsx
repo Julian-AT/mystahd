@@ -21,6 +21,7 @@ import ClearShoppingCartModal from "../modals/clear-shopping-cart-modal";
 import { createPaymentLink } from "@/server-actions/sellix";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
+import NavLink from "../nav-link";
 
 export function ShoppingCartSheet() {
   const { cartItems, isLoading, removeFromCart, getPaymentLink } =
@@ -29,11 +30,16 @@ export function ShoppingCartSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">
-          <div className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex">
-            <IconShoppingCart />
-          </div>
-        </Button>
+        <NavLink
+          href="/store"
+          className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex"
+        >
+          <IconShoppingCart className="h-5 w-5" />
+          Shopping Cart
+          <Badge className="bg-gray-700 text-secondary-foreground rounded-full h-4 w-4 px- flex items-center justify-center">
+            {cartItems.length}
+          </Badge>
+        </NavLink>
       </SheetTrigger>
       <SheetContent className="bg-gray-900">
         <SheetHeader>

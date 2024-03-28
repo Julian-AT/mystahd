@@ -41,10 +41,10 @@ const Navbar = () => {
             : "hidden"
         }`}
       >
-        <div className="md:grid md:grid-cols-3 custom-screen items-center ">
+        <div className="md:grid md:grid-cols-3 custom-screen">
           <NavHeader state={state} onClick={() => setState(!state)} />
           <div
-            className={`col-span-2 grid grid-cols-2 items-center mt-8 text-gray-300 md:font-medium${
+            className={`col-span-2 grid grid-cols-2 items-center text-gray-300 md:font-medium${
               state ? "block" : "hidden"
             } `}
           >
@@ -52,7 +52,7 @@ const Navbar = () => {
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx} className="relative hover:text-gray-50">
-                    <Link href={item.href} className="block text-xl">
+                    <Link href={item.href} className="block text-lg">
                       {item.name}
                     </Link>
                   </li>

@@ -8,10 +8,13 @@ interface NavHeaderProps {
 }
 
 const NavHeader = ({ onClick, state, menuBtnEl }: NavHeaderProps) => (
-  <div className="flex items-center justify-between py-5 md:block">
-    <Link href="/">
-      <Brand />
-    </Link>
+  <div className="flex justify-between py-5 md:block">
+    <div className="flex items-center font-bold space-x-3">
+      <Link href="/">
+        <Brand />
+      </Link>
+      <span className="text-xl">Shadow Overlay</span>
+    </div>
     <div className="md:hidden">
       <button
         role="button"

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Store - Shadow Overlay",
-  description: "Best cheats for all games",
+  description: "Best Call Of Duty cheats",
 };
 
 export default function Store() {
