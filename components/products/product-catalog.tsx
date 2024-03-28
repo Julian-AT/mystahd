@@ -7,6 +7,12 @@ import ProductSkeleton from "./product-skeleton";
 import { useShoppingCart } from "@/lib/provider/shopping-cart-context";
 import AddProductToCartModal from "../modals/add-product-to-cart-modal";
 
+enum ProductCategory {
+  ACCOUNTS = "accounts",
+  CHEATS = "cheats",
+  UNLOCKS = "unlocks",
+}
+
 interface ProductCatalogProps {
   category: ProductCategory;
 }
