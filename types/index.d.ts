@@ -27,11 +27,12 @@ interface Product {
   price_discount: number;
   affiliate_revenue_percent: number;
   description: string;
-  image_attachment: ProductImage | "";
+  image_attachment: ProductImage | undefined;
   recurring_interval_count: number;
   recurring_interval: string;
   category: ProductCategory;
   grade: ProductGrade;
+  image: string | undefined;
 }
 
 interface StoreData {

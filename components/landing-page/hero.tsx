@@ -50,19 +50,6 @@ const Hero = () => (
               comfortable.
             </p>
           </div>
-          <GradientWrapper
-            className="mt-16 sm:mt-28"
-            wrapperClassName="max-w-3xl h-[250px] top-12 inset-0 sm:h-[300px] lg:h-[650px]"
-          >
-            <YouTube
-              videoId="ReICkjDSUA0"
-              opts={{
-                width: "100%",
-                height: "100%",
-              }}
-              className="h-[250px] sm:h-[300px] lg:h-[650px]"
-            />
-          </GradientWrapper>
         </div>
       </LayoutEffect>
     </div>

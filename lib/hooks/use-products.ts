@@ -36,6 +36,11 @@ export const useProducts = () => {
             : product.type === "SERVICE"
             ? ProductCategory.UNLOCKS
             : ProductCategory.ACCOUNTS,
+        image:
+          product.image_attachment &&
+          product.image_attachment.cloudflare_image_id
+            ? `https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/${product.image_attachment.cloudflare_image_id}/shopitem`
+            : undefined,
       }));
       setProducts(extendedProducts);
       setLoading(false);

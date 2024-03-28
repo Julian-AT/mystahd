@@ -39,34 +39,27 @@ const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
     id,
     title,
     description,
-    price,
+    price_display: price,
     image_attachment,
     recurring_interval,
     recurring_interval_count,
+    grade,
+    image,
   } = product;
-  const image =
-    image_attachment && image_attachment.cloudflare_image_id
-      ? `https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/${image_attachment.cloudflare_image_id}/shopitem`
-      : undefined;
-  const grade = title.includes("Premium Plus")
-    ? ProductGrade.PREMIUM_PLUS
-    : title.includes("Premium")
-    ? ProductGrade.PREMIUM
-    : ProductGrade.ESP_ONLY;
 
   const validityPeriod = `${recurring_interval_count} ${recurring_interval}${
     recurring_interval_count > 1 ? "S" : ""
   }`;
 
   return (
-    <div className="relative mx-auto w-full">
+    <div className="relative bg-gray-900">
       <Dialog>
         <DialogTrigger asChild>
           <div>
             <ProductCard product={product} />
           </div>
         </DialogTrigger>
-        <DialogContent className="h-auto border">
+        <DialogContent className="h-auto border bg-gray-900">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription className="py-3">
@@ -88,7 +81,7 @@ const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
           <DialogFooter className="flex w-full justify-between">
             <div className="w-full">
               <span className="text-lg uppercase">€</span>
-              <span className="text-lg">{price},-</span>
+              <span className="text-lg">{(price as number).toFixed(2)}</span>
             </div>
             {product.type === "SUBSCRIPTION" ? (
               <UserEmailModal

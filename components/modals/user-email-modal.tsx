@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
-import { z } from "zod";
+import { boolean, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -26,6 +26,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { IconSpinner } from "../icons";
 
 interface UserEmailModalProps {
   product: Product;
@@ -45,6 +46,7 @@ const UserEmailModal = ({
   product,
   getPaymentLinkForProduct,
 }: UserEmailModalProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -55,13 +57,16 @@ const UserEmailModal = ({
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setIsLoading(true);
     const link = await getPaymentLinkForProduct(product, data.email);
     if (!link) {
+      setIsLoading(false);
       return toast.error("Failed to create payment link", {
         description: "Please try again later",
       });
     }
 
+    setIsLoading(false);
     router.replace(link);
   }
 
@@ -69,9 +74,11 @@ const UserEmailModal = ({
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant={"outline"}>Subscribe</Button>
+          <Button variant={"outline"} className="bg-gray-900 hover:bg-gray-800">
+            Subscribe
+          </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="bg-gray-900">
           <DialogHeader>
             <DialogTitle>Enter your Email.</DialogTitle>
             <DialogDescription>
@@ -93,7 +100,10 @@ const UserEmailModal = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading && <IconSpinner className="animate-spin mr-1.5" />}
+                Submit
+              </Button>
             </form>
           </Form>
         </DialogContent>

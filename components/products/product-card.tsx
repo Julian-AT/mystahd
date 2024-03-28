@@ -19,7 +19,7 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
     id,
     title,
     description,
-    price,
+    price_display: price,
     image_attachment,
     recurring_interval,
     recurring_interval_count,
@@ -101,7 +101,7 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
             <div className="flex justify-end">
               <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
                 <span className="text-lg uppercase">€</span>
-                <span className="text-lg">{price},-</span>
+                <span className="text-lg">{(price as number).toFixed(2)}</span>
               </p>
             </div>
           </div>
