@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <header className="relative">
-      <div className="custom-screen md:hidden">
+      <div className="custom-screen lg:hidden">
         <NavHeader
           menuBtnEl={menuBtnEl}
           state={state}
@@ -35,7 +35,7 @@ const Navbar = () => {
         />
       </div>
       <nav
-        className={`pb-5 md:text-sm md:static md:block ${
+        className={`pb-5 lg:text-sm lg:static lg:block ${
           state
             ? "bg-gray-900 absolute z-20 top-0 inset-x-0 rounded-b-2xl shadow-xl md:bg-gray-900"
             : "hidden"
@@ -48,7 +48,7 @@ const Navbar = () => {
               state ? "block" : "hidden"
             } `}
           >
-            <ul className="flex justify-center items-center space-y-6 md:flex md:space-x-10 md:space-y-0">
+            <ul className="flex flex-col lg:flex-row justify-center items-centerspace-y-6 md:flex md:space-x-10 md:space-y-0">
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx} className="relative hover:text-gray-50">
@@ -59,7 +59,7 @@ const Navbar = () => {
                 );
               })}
             </ul>
-            <div className="gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
+            <div className="gap-x-6 items-center justify-center space-y-6 md:flex md:space-y-0 md:mt-0">
               <NavLink
                 href="/store"
                 className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex"

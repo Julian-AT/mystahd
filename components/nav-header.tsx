@@ -8,14 +8,14 @@ interface NavHeaderProps {
 }
 
 const NavHeader = ({ onClick, state, menuBtnEl }: NavHeaderProps) => (
-  <div className="flex justify-between py-5 md:block">
+  <div className="flex justify-between py-5 lg:block">
     <div className="flex items-center font-bold space-x-3">
       <Link href="/">
         <Brand />
       </Link>
       <span className="text-xl">Shadow Overlay</span>
     </div>
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         role="button"
         aria-label="Open the menu"

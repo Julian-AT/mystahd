@@ -57,17 +57,17 @@ const Pricing = ({ title }: PricingPlanProps) => {
         </h2>
       </div>
       <LayoutEffect
-        className="duration-1000 delay-300 grid grid-cols-3 space-x-5 my-10"
+        className="duration-1000 delay-300 grid lg:grid-cols-3 gap-5 my-10"
         isInviewState={{
           trueState: "opacity-1",
           falseState: "opacity-0",
         }}
       >
-        <div className="mt-16 justify-center gap-6 sm:grid sm:grid-cols-2 sm:space-y-0 lg:grid-cols-3">
+        <div>
           {plans.map((item, idx) => (
             <div
               key={idx}
-              className={`relative flex-1 flex items-stretch flex-col rounded-xl border border-gray-800 mt-6 sm:mt-0 ${
+              className={`flex-1 flex items-stretch flex-col rounded-xl border border-gray-800 mt-6 sm:mt-0 ${
                 item.isMostPop ? "border border-purple-500" : ""
               }`}
               style={{
