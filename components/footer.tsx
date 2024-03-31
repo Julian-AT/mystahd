@@ -6,11 +6,11 @@ import Image from "next/image";
 const Footer = () => {
   const footerNavs = [
     {
-      href: "javascript:void()",
+      href: "https://discord.gg/5Ws2CAvr3G",
       name: "About",
     },
     {
-      href: "javascript:void()",
+      href: "/support",
       name: "Support",
     },
   ];

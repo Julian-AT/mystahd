@@ -18,7 +18,8 @@ const Navbar = () => {
     { name: "Cheats", href: "/store/cheats" },
     { name: "Unlocks", href: "/store/unlocks" },
     { name: "Accounts", href: "/store/accounts" },
-    { name: "About Us", href: "https://discord.gg/5Ws2CAvr3G" },
+    { name: "Support", href: "/support" },
+    { name: "About", href: "https://discord.gg/5Ws2CAvr3G" },
   ];
 
   useEffect(() => {
