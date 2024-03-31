@@ -18,32 +18,14 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
   const { title, description, price_display: price, image } = product;
 
   return (
-    <div
-      className={cn(
-        "relative inline-block duration-300 ease-in-out transition-transform transform w-full cursor-pointer",
-        !disableAnimations && "hover:-translate-y-2"
-      )}
-    >
-      <div className="relative rounded-xl">
-        <div className="absolute top-0 flex w-full justify-center">
-          <div className="left-0 h-[1.5px] animate-border-width rounded-full bg-gradient-to-r from-[rgba(17,17,17,0)] via-[#b439ad] to-[rgba(17,17,17,0)] transition-all duration-[750]" />
-        </div>
-        <div className="border rounded-lg p-2 bg-gradient-to-b">
+    <div className="flex flex-col space-y-3">
+      <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
+        <div className="shadow p-4 rounded-lg bg-gray-900 border border-gray-800">
           <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-            <div
-              className={cn(
-                "transition-transform duration-500 transform ease-in-out w-full",
-                !disableAnimations && "hover:scale-110"
-              )}
-            >
-              <div
-                className={cn(
-                  "absolute inset-0 bg-secondary",
-                  !image && "opacity-20"
-                )}
-              >
+            <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+              <div className="absolute inset-0 bg-gray-700">
                 {image && (
-                  <Image src={image} alt={title} fill objectFit="cover" />
+                  <Image src={image} alt={title} fill className="object-" />
                 )}
               </div>
             </div>
@@ -58,12 +40,14 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
             </p>
           </div>
 
-          <div className="flex justify-between mt-8">
-            <ProductBadges product={product} />
+          <div className="flex justify-between mt-8 items-center">
+            <div className="flex items-center space-x-3">
+              <ProductBadges product={product} />
+            </div>
+            <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"></button>
             <div className="flex justify-end">
               <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                <span className="text-lg uppercase">€</span>
-                <span className="text-lg">{(price as number).toFixed(2)}</span>
+                {price}
               </p>
             </div>
           </div>

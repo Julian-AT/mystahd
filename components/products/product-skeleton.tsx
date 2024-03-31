@@ -5,10 +5,10 @@ const ProductSkeleton = () => {
   return (
     <div className="flex flex-col space-y-3">
       <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
-        <div className="shadow p-4 rounded-lg bg-gray-800 border border-border">
+        <div className="shadow p-4 rounded-lg bg-gray-900 border border-gray-800">
           <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
             <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-              <div className="absolute inset-0 bg-gray-700" />
+              <div className="absolute inset-0 bg-gray-800" />
             </div>
           </div>
 
@@ -21,7 +21,7 @@ const ProductSkeleton = () => {
             </p>
           </div>
 
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between items-center mt-8">
             <div className="flex items-center space-x-3">
               <Skeleton className="h-4 w-10 rounded-xl" />
               <Skeleton className="h-4 w-10 rounded-xl" />
