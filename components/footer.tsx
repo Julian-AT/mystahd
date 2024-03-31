@@ -1,37 +1,52 @@
+"use client";
+
+import PaymentMethods from "@/public/images/payment-methods.png";
+import Image from "next/image";
+
 const Footer = () => {
+  const footerNavs = [
+    {
+      href: "javascript:void()",
+      name: "About",
+    },
+    {
+      href: "javascript:void()",
+      name: "Support",
+    },
+  ];
+
   return (
-    <footer className="mt-20">
-      <div className="custom-screen">
-        <div className="grid grid-cols-3 mt-10 py-8 border-t border-gray-800">
-          <p className="text-gray-400">
-            © 2024 Shadow Overlay. All rights reserved.
-          </p>
-          <div className="text-muted-foreground text-center">
-            Made with ❤️ by Mystahd
-          </div>
-          <div className="flex items-center justify-end  gap-x-6 text-gray-500 mt-6 sm:mt-0">
-            <a href="/" target="_blank" aria-label="social media">
-              <svg
-                className="w-6 h-6 hover:text-gray-200 duration-150"
-                fill="none"
-                viewBox="0 0 48 48"
-              >
-                <g clip-path="url(#clip0_17_80)">
-                  <path
-                    fill="currentColor"
-                    d="M15.1 43.5c18.11 0 28.017-15.006 28.017-28.016 0-.422-.01-.853-.029-1.275A19.998 19.998 0 0048 9.11c-1.795.798-3.7 1.32-5.652 1.546a9.9 9.9 0 004.33-5.445 19.794 19.794 0 01-6.251 2.39 9.86 9.86 0 00-16.788 8.979A27.97 27.97 0 013.346 6.299 9.859 9.859 0 006.393 19.44a9.86 9.86 0 01-4.462-1.228v.122a9.844 9.844 0 007.901 9.656 9.788 9.788 0 01-4.442.169 9.867 9.867 0 009.195 6.843A19.75 19.75 0 010 39.078 27.937 27.937 0 0015.1 43.5z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_17_80">
-                    <path fill="currentColor" d="M0 0h48v48H0z" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </a>
-          </div>
-        </div>
+    <footer className=" px-4 py-5 mt-20 max-w-screen-xl mx-auto md:px-8 border-t">
+      <div className="max-w-lg sm:mx-auto sm:text-center">
+        <span className="text-3xl font-bold">ShadowOverlay</span>
+        <p className="leading-relaxed mt-2 text-[15px] text-muted-foreground">
+          Business address - Flintegata 56, Stavanger, Norway
+          <br />
+          Phone: +47 461 62 570
+        </p>
       </div>
+      <div className="flex items-center justify-center my-5">
+        <Image src={PaymentMethods} width={150} alt="Payment Methods" />
+      </div>
+      <ul className="items-center justify-center mt-8 space-y-5 sm:flex sm:space-x-4 sm:space-y-0">
+        {footerNavs.map((item, idx) => (
+          <li className=" hover:text-muted-foreground/95" key={idx}>
+            <a key={idx} href={item.href}>
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-8 items-center justify-center text-muted-foreground sm:flex">
+        &copy; 2024 ShadowOverlay All rights reserved.
+      </div>
+      <style jsx>{`
+        .svg-icon path,
+        .svg-icon polygon,
+        .svg-icon rect {
+          fill: currentColor;
+        }
+      `}</style>
     </footer>
   );
 };

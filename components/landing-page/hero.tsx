@@ -20,14 +20,14 @@ const Hero = () => (
           <div className="space-y-5 max-w-3xl mx-auto text-center">
             <div className="flex space-x-5 justify-center font-medium text-sm">
               <NavLink
-                href="/store"
+                href="https://discord.gg/5Ws2CAvr3G"
                 className="flex items-center gap-2  text-secondary-foreground bg-gray-800  hover:bg-gray-700"
               >
                 <IconDiscord className="w-8 h-8" />
                 Discord
               </NavLink>
               <NavLink
-                href="/store"
+                href="https://t.me/ShadowOverlay"
                 className="flex items-center gap-2 mx-3 text-secondary-foreground bg-gray-800  hover:bg-gray-700"
               >
                 <IconTelegram className="w-8 h-8" />

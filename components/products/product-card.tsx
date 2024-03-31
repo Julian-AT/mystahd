@@ -18,11 +18,12 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
   const { title, description, price_display: price, image } = product;
 
   return (
-    <div className="flex flex-col space-y-3">
+    <div className="flex flex-col space-y-3 group">
       <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
         <div className="shadow p-4 rounded-lg bg-gray-900 border border-gray-800">
-          <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
-            <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-65 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+            <div className="relative py-20 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
               <div className="absolute inset-0 bg-gray-700">
                 {image && (
                   <Image src={image} alt={title} fill className="object-" />
@@ -47,7 +48,7 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
             <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"></button>
             <div className="flex justify-end">
               <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                {price}
+                €{price.toFixed(2)}
               </p>
             </div>
           </div>

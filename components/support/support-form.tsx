@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,8 +16,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Textarea } from "../ui/textarea";
+import { IconSpinner } from "../icons";
+import { actionSubmitSupportTicket } from "@/actions/discord";
+import { toast } from "sonner";
 
 const SupportForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof SupportTicketSchema>>({
     resolver: zodResolver(SupportTicketSchema),
     defaultValues: {
@@ -28,8 +33,19 @@ const SupportForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof SupportTicketSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof SupportTicketSchema>) {
+    setIsLoading(true);
+    const res = await actionSubmitSupportTicket(values);
+    setIsLoading(false);
+    if (!res) {
+      return toast.error("Failed to submit ticket.", {
+        description: "Please try again later.",
+      });
+    } else {
+      return toast.success("Ticket submitted successfully", {
+        description: "We will get back to you as soon as possible.",
+      });
+    }
   }
 
   return (
@@ -55,7 +71,7 @@ const SupportForm = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input placeholder="Example Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -66,9 +82,22 @@ const SupportForm = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Emai</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="example@gmail.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ticket Title" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,13 +110,22 @@ const SupportForm = () => {
                   <FormItem>
                     <FormLabel>Message</FormLabel>
                     <FormControl>
-                      <Textarea cols={4} className="resize-none h-24" />
+                      <Textarea
+                        cols={4}
+                        maxLength={500}
+                        className="resize-none h-24"
+                        placeholder="Your message here..."
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit">Submit</Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading && <IconSpinner className="animate-spin mr-1.5" />}
+                Submit
+              </Button>
             </form>
           </Form>
         </div>

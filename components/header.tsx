@@ -4,17 +4,21 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import NavHeader from "@/components/nav-header";
 import NavLink from "@/components/nav-link";
-import { IconShoppingCart } from "./icons";
+import { IconDownload, IconShoppingCart } from "./icons";
 import { ShoppingCartSheet } from "./shopping-cart/shopping-cart-sheet";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [state, setState] = useState(false);
+  const pathname = usePathname();
   const menuBtnEl = useRef<any>();
 
   const navigation = [
     { name: "Cheats", href: "/store/cheats" },
     { name: "Unlocks", href: "/store/unlocks" },
     { name: "Accounts", href: "/store/accounts" },
+    { name: "About Us", href: "https://discord.gg/5Ws2CAvr3G" },
   ];
 
   useEffect(() => {
@@ -51,7 +55,14 @@ const Navbar = () => {
             <ul className="flex flex-col lg:flex-row justify-center items-centerspace-y-6 md:flex md:space-x-10 md:space-y-0">
               {navigation.map((item, idx) => {
                 return (
-                  <li key={idx} className="relative hover:text-gray-50">
+                  <li
+                    key={idx}
+                    className={cn(
+                      "relative hover:opacity-80",
+                      item.href === pathname &&
+                        "bg-gradient-to-r from-cyan-500 via-purple-500  bg-clip-text text-transparent font-semibold bg-purple-600 drop-shadow-2xl"
+                    )}
+                  >
                     <Link href={item.href} className="block text-lg">
                       {item.name}
                     </Link>
@@ -60,25 +71,14 @@ const Navbar = () => {
               })}
             </ul>
             <div className="gap-x-6 items-center justify-center space-y-6 md:flex md:space-y-0 md:mt-0">
+              <ShoppingCartSheet />
               <NavLink
-                href="/store"
+                href="https://discord.gg/5Ws2CAvr3G"
                 className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex"
               >
-                Store
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                Download
+                <IconDownload />
               </NavLink>
-              <ShoppingCartSheet />
             </div>
           </div>
         </div>
