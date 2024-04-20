@@ -18,6 +18,7 @@ const Navbar = () => {
     { name: "Cheats", href: "/store/cheats" },
     { name: "Services", href: "/store/services" },
     { name: "Accounts", href: "/store/accounts" },
+    { name: "Support", href: "/support" },
   ];
 
   useEffect(() => {
