@@ -16,10 +16,8 @@ const Navbar = () => {
 
   const navigation = [
     { name: "Cheats", href: "/store/cheats" },
-    { name: "Unlocks", href: "/store/unlocks" },
+    { name: "Services", href: "/store/services" },
     { name: "Accounts", href: "/store/accounts" },
-    { name: "Support", href: "/support" },
-    { name: "About", href: "https://discord.gg/5Ws2CAvr3G" },
   ];
 
   useEffect(() => {
@@ -72,14 +70,14 @@ const Navbar = () => {
               })}
             </ul>
             <div className="gap-x-6 items-center justify-center space-y-6 md:flex md:space-y-0 md:mt-0">
-              <ShoppingCartSheet />
               <NavLink
-                href="https://discord.gg/5Ws2CAvr3G"
+                href="https://mega.nz/file/fQsGSJgQ#iZ_sRWSoIyBp-BTxbrtWe0Ue8wRV-xblYBobIZ6DV9s"
                 className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex"
               >
                 Download
                 <IconDownload />
               </NavLink>
+              <ShoppingCartSheet />
             </div>
           </div>
         </div>

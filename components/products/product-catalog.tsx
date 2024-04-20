@@ -10,7 +10,7 @@ import AddProductToCartModal from "../modals/add-product-to-cart-modal";
 enum ProductCategory {
   ACCOUNTS = "accounts",
   CHEATS = "cheats",
-  UNLOCKS = "unlocks",
+  SERVICES = "services",
 }
 
 interface ProductCatalogProps {
@@ -21,12 +21,19 @@ const ProductCatalog = ({ category }: ProductCatalogProps) => {
   const { products, loading, error } = useProducts();
   const { addToCart } = useShoppingCart();
 
-  if (error) return <div>Error: {error}</div>;
-  if (!products) return <div>No products found</div>;
+  if (error)
+    return (
+      <div className="flex items-center justify-center w-full h-screen text-4xl text-center col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4">
+        {error}
+      </div>
+    );
+  if (!products)
+    return (
+      <div className="flex items-center justify-center w-full h-screen text-4xl text-center col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4">
+        Products could not be fetched from external data source.
+      </div>
+    );
 
-  products.map((product) => {
-    console.log(product.category);
-  });
   const filteredProducts = products.filter(
     (product) => product.category === category
   );

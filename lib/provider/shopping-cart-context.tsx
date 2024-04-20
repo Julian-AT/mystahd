@@ -1,4 +1,4 @@
-import { createPaymentLink } from "@/server-actions/sellix";
+import { createPaymentLink } from "@/actions/sellix";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { toast } from "sonner";
 
@@ -16,6 +16,10 @@ interface ShoppingCartContextType {
     product: Product,
     email: string
   ) => Promise<string | undefined>;
+  getPaymentLinkForProducts: (
+    products: CartItem[],
+    email: string
+  ) => Promise<string | undefined>;
   clearCart: () => void;
 }
 
@@ -26,6 +30,7 @@ const ShoppingCartContext = createContext<ShoppingCartContextType>({
   removeFromCart: () => {},
   getPaymentLink: async () => "",
   getPaymentLinkForProduct: async () => "",
+  getPaymentLinkForProducts: async () => "",
   clearCart: () => {},
 });
 
@@ -57,12 +62,9 @@ export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
         throw new Error(error);
       }
       const link = data.data.url;
-      console.log(link);
       setIsLoading(false);
       return link;
     } catch (error) {
-      console.log(error);
-
       toast.error("Failed to create payment link");
       setIsLoading(false);
     }
@@ -77,13 +79,29 @@ export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
         throw new Error(error);
       }
       const link = data.data.url;
-      console.log(link);
       setIsLoading(false);
       return link;
     } catch (error) {
-      console.log(error);
-
       toast.error("Failed to create payment link for product " + product.title);
+      setIsLoading(false);
+    }
+  };
+
+  const getPaymentLinkForProducts = async (
+    products: CartItem[],
+    email: string
+  ) => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await createPaymentLink(products, email);
+      if (error) {
+        throw new Error(error);
+      }
+      const link = data.data.url;
+      setIsLoading(false);
+      return link;
+    } catch (error) {
+      toast.error("Failed to create payment link for products");
       setIsLoading(false);
     }
   };
@@ -126,6 +144,7 @@ export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
     removeFromCart,
     getPaymentLink,
     getPaymentLinkForProduct,
+    getPaymentLinkForProducts,
     clearCart,
   };
 

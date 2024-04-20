@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "../ui/scroll-area";
 import ProductCard from "../products/product-card";
 import ProductModalContent from "../modals/product-modal-content";
+import ProductBadges from "../products/product-badges";
 
 export enum ProductGrade {
   PREMIUM_PLUS = "Premium+",
@@ -28,15 +29,7 @@ interface ProductCardProps {
 }
 
 const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
-  const {
-    id,
-    title,
-    description,
-    price,
-    image_attachment,
-    recurring_interval,
-    recurring_interval_count,
-  } = product;
+  const { id, title, description, price_display, image_attachment } = product;
   const image =
     image_attachment && image_attachment.cloudflare_image_id
       ? `https://imagedelivery.net/95QNzrEeP7RU5l5WdbyrKw/${image_attachment.cloudflare_image_id}/shopitem`
@@ -46,10 +39,6 @@ const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
     : title.includes("Premium")
     ? ProductGrade.PREMIUM
     : ProductGrade.ESP_ONLY;
-
-  const validityPeriod = `${recurring_interval_count} ${recurring_interval}${
-    recurring_interval_count > 1 ? "S" : ""
-  }`;
 
   return (
     <div className="relative mx-auto w-full">
@@ -64,12 +53,7 @@ const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription className="py-3">
               <div className="flex items-center space-x-3">
-                <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                  {validityPeriod}
-                </Badge>
-                <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                  {grade}
-                </Badge>
+                <ProductBadges product={product} />
               </div>
             </DialogDescription>
           </DialogHeader>
@@ -81,7 +65,7 @@ const ShoppingCartItem = ({ product, removeFromCard }: ProductCardProps) => {
           <DialogFooter className="flex w-full justify-between">
             <div className="w-full">
               <span className="text-lg uppercase">€</span>
-              <span className="text-lg">{price},-</span>
+              <span className="text-lg">{price_display},-</span>
             </div>
             <Button
               onClick={(e) => {

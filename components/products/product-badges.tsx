@@ -12,6 +12,9 @@ const ProductBadges = ({ product }: ProductBadgesProps) => {
   const validityPeriod = `${recurring_interval_count} ${recurring_interval}${
     recurring_interval_count > 1 ? "S" : ""
   }`;
+
+  if (!product) return null;
+
   return (
     <div className="flex items-center space-x-3">
       {type === "SUBSCRIPTION" && (
@@ -31,11 +34,23 @@ const ProductBadges = ({ product }: ProductBadgesProps) => {
             Premium Plus
           </span>
         </Badge>
-      ) : (
+      ) : grade === ProductGrade.ESP_ONLY ? (
         <Badge className="bg-gray-800  text-secondary-foreground hover:bg-gray-700 font-normal">
           ESP Only
         </Badge>
-      )}
+      ) : grade === ProductGrade.ACCOUNT ? (
+        <Badge className="bg-gray-800  text-secondary-foreground hover:bg-gray-700 font-normal">
+          Account
+        </Badge>
+      ) : grade === ProductGrade.SERVICE ? (
+        <Badge className="bg-gray-800  text-secondary-foreground hover:bg-gray-700 font-normal">
+          Service
+        </Badge>
+      ) : grade === ProductGrade.SPOOFER ? (
+        <Badge className="bg-gray-800  text-secondary-foreground hover:bg-gray-700 font-normal">
+          Spoofer
+        </Badge>
+      ) : null}
     </div>
   );
 };

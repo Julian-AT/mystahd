@@ -19,6 +19,7 @@ import { IconSpinner } from "../icons";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import UserEmailModal from "./user-email-modal";
+import ProductBadges from "../products/product-badges";
 
 export enum ProductGrade {
   PREMIUM_PLUS = "Premium+",
@@ -32,24 +33,9 @@ interface ProductCardProps {
 }
 
 const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
-  const { getPaymentLinkForProduct, isLoading } = useShoppingCart();
-  const router = useRouter();
+  const { getPaymentLinkForProduct, getPaymentLink } = useShoppingCart();
 
-  const {
-    id,
-    title,
-    description,
-    price_display: price,
-    image_attachment,
-    recurring_interval,
-    recurring_interval_count,
-    grade,
-    image,
-  } = product;
-
-  const validityPeriod = `${recurring_interval_count} ${recurring_interval}${
-    recurring_interval_count > 1 ? "S" : ""
-  }`;
+  const { title, description, price_display: price, image } = product;
 
   return (
     <div className="relative bg-gray-900">
@@ -64,12 +50,7 @@ const AddProductToCartModal = ({ product, addToCart }: ProductCardProps) => {
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription className="py-3">
               <div className="flex items-center space-x-3">
-                <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                  {validityPeriod}
-                </Badge>
-                <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                  {grade}
-                </Badge>
+                <ProductBadges product={product} />
               </div>
             </DialogDescription>
           </DialogHeader>

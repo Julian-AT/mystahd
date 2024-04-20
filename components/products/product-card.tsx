@@ -7,6 +7,9 @@ export enum ProductGrade {
   PREMIUM_PLUS,
   PREMIUM,
   ESP_ONLY,
+  ACCOUNT,
+  SERVICE,
+  SPOOFER,
 }
 
 interface ProductCardProps {
@@ -19,10 +22,21 @@ const ProductCard = ({ product, disableAnimations }: ProductCardProps) => {
 
   return (
     <div className="flex flex-col space-y-3 group">
-      <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full cursor-pointer">
+      <div
+        className={cn(
+          "relative inline-block duration-300 ease-in-out transition-transform transform w-full cursor-pointer",
+          !disableAnimations && "hover:-translate-y-2"
+        )}
+      >
         <div className="shadow p-4 rounded-lg bg-gray-900 border border-gray-800">
           <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-65 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+            <div
+              className={cn(
+                "absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-65",
+                !disableAnimations &&
+                  "group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+              )}
+            />
             <div className="relative py-20 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
               <div className="absolute inset-0 bg-gray-700">
                 {image && (

@@ -37,8 +37,8 @@ interface Product {
 
 interface StoreData {
   status: number;
-  data: {
-    products: Product[];
+  products: {
+    data: Product[];
   };
   error: null | string;
   message: null | string;

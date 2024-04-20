@@ -18,13 +18,15 @@ import Image from "next/image";
 import { Badge } from "../ui/badge";
 import ShoppingCartItem from "./shopping-cart-item";
 import ClearShoppingCartModal from "../modals/clear-shopping-cart-modal";
-import { createPaymentLink } from "@/server-actions/sellix";
+import { createPaymentLink } from "@/actions/sellix";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 import NavLink from "../nav-link";
+import { ScrollArea } from "../ui/scroll-area";
+import UserCheckoutModal from "../modals/user-checkout-modal";
 
 export function ShoppingCartSheet() {
-  const { cartItems, isLoading, removeFromCart, getPaymentLink } =
+  const { cartItems, isLoading, removeFromCart, getPaymentLinkForProducts } =
     useShoppingCart();
 
   return (
@@ -50,15 +52,16 @@ export function ShoppingCartSheet() {
           </SheetDescription>
         </SheetHeader>
         <div className="flex flex-col justify-between h-full pb-12">
-          <div className="my-3">
+          <ScrollArea className="flex flex-col h-full my-3">
             {cartItems.map((product: Product) => (
-              <ShoppingCartItem
-                product={product}
-                removeFromCard={removeFromCart}
-                key={product.id}
-              />
+              <div key={product.id} className="my-3 mr-2.5">
+                <ShoppingCartItem
+                  product={product}
+                  removeFromCard={removeFromCart}
+                />
+              </div>
             ))}
-          </div>
+          </ScrollArea>
           <div className="flex flex-col space-y-5">
             <div className="flex justify-between gap-3">
               <div
@@ -76,23 +79,10 @@ export function ShoppingCartSheet() {
               </div>
               <ClearShoppingCartModal />
             </div>
-            <Button
-              variant="default"
-              className="w-full"
-              disabled={cartItems.length === 0 || isLoading}
-              onClick={async () => {
-                const link = await getPaymentLink("EMAIL");
-                if (!link) {
-                  return toast.error("Failed to create payment link", {
-                    description: "Please try again later",
-                  });
-                }
-                redirect(link);
-              }}
-            >
-              {isLoading && <IconSpinner className="animate-spin" />}
-              Checkout
-            </Button>
+            <UserCheckoutModal
+              getPaymentLinkForProducts={getPaymentLinkForProducts}
+              products={cartItems}
+            />
           </div>
         </div>
       </SheetContent>

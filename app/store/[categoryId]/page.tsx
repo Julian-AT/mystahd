@@ -7,18 +7,19 @@ import { notFound } from "next/navigation";
 enum ProductCategory {
   ACCOUNTS = "accounts",
   CHEATS = "cheats",
-  UNLOCKS = "unlocks",
+  SERVICES = "services",
 }
 
 export default function Store() {
   const pathname = usePathname();
   const category = pathname.split("/").pop();
-  console.log(category);
 
-  if (!category) return notFound();
+  if (
+    !category ||
+    !Object.values(ProductCategory).includes(category as ProductCategory)
+  )
+    return notFound();
   const productCategory: ProductCategory = category as ProductCategory;
-
-  console.log(productCategory);
 
   return (
     <div>
